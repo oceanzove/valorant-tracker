@@ -3,10 +3,18 @@ from os import system, makedirs, path, name as os_name
 
 from utils import green, white
 
-# Функция для сохранения данных в файл
-def save_data(data):
+
+# Функция для сохранения данных о матчах в файл
+def save_data_match(data):
     with open("matches.txt", "a") as file:
         file.write(data + "\n")
+
+
+# Функция для сохранение данных о тренировке в файл
+def save_data_training(data):
+    with open("training.txt", "a") as file:
+        file.write(data + "\n")
+
 
 while True:
     system("cls" if os_name == "nt" else "clear")
@@ -18,7 +26,7 @@ while True:
 
     for i, name in enumerate([
         "Добавить матч",
-        "Удалить последнее занятие",
+        "Добавить тренировку",
         "Изменить время последнего занятия",
         "Добавить подпись к последнему занятию"
     ]):
@@ -48,7 +56,15 @@ while True:
         match_data = f"{datetime.now()}: Счет - {score}, Убийства - {kills}, Смерти - {deaths}, Помощь - {assists}, Хедшоты - {headshot_percentage}%, ADR - {adr}"
 
         # Сохраняем данные в файл
-        save_data(match_data)
+        save_data_match(match_data)
         print("Данные о матче успешно сохранены.")
         input("\nНажмите Enter для продолжения...")
 
+    if session_id == 2:
+        time = input("Введите время тренировки: ")
+
+        training_data = f"{datetime.now()}: Время тренировки - {time}"
+
+        save_data_match(training_data)
+        print("Данные о тренировке успешно сохранены.")
+        input("\nНажмите Enter для продолжения...")
